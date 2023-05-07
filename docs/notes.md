@@ -1,3 +1,5 @@
 - Laptop should be on and VS code running, but not essential.
 - Ensure the hello world script is on the robot.
 - Best to turn the robot on before but not essential.
+
+- pybricks-stubs for intellisense

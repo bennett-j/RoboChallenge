@@ -46,6 +46,14 @@ Great, you've written your first program. Now we need to upload it to the robot 
 
 ## Getting the robot to move
 
+It would be inconvenient if we had to control the robot through the motor speeds individually so instead we use `DriveBase` which provides some useful functions.
+
+```
+straight()
+turn()
+drive()
+```
+
 - do some explaining
 - say we previously moved motors individually but that's inconvenient
 - we use `objects` that help us out. We will use `DriveBase`
@@ -53,13 +61,33 @@ Great, you've written your first program. Now we need to upload it to the robot 
 - and what functionality it gives (i.e. which functions)
 - then set some movement challenges
 
+1. Drive forwards 1 metre
+1. Drive backwards 1 metre
+1. Turn 180° on the spot both ways
+1. Drive in a square
+1. Drive in a circle
+
 > Challenge: get the robot to move by controlling the motors without `DriveBase`
 
 
+
+## Sensing
+
+
+1. Use the script `threshold-test.py` to determine the reflectance of the white background and the black line and make a note of these.
+
+
+
+Practise: put a start and end line on the floor 1 metre apart. Get the robot to drive until it gets to the line.
+
+## Racing
+Now let's see if we can get our robot to race around the track by following the line!
+
+> Challenge: Pause and see if you can work out an algorithm for the robot to follow the line.
+
+
+
 ## Thoughts
+Add a start button
 
 We're asking the robot to get from A to B but it's wearing a blindfold! It's no wonder it gets it a little bit wrong. Think about the sensory things you use to localise and navigate yourself. What could the robot use? If you were blindfolded, what might be a way you could navigate from A to B?
-
-SENSORS!!
-
-Now set up a sensor and get it to follow a line.
