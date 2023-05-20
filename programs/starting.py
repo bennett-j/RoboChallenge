@@ -15,4 +15,4 @@ right_motor = Motor(Port.B)
 left_motor = Motor(Port.C)
 
 # Turn motor at 360 °/second
-left_motor.run(360)
+left_motor.run_time(360,1000)

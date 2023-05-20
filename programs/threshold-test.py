@@ -12,4 +12,4 @@ ev3.speaker.beep
 line_sensor = ColorSensor(Port.S3)
 
 while True:
-    print(line_sensor.reflection())
+    ev3.screen.print(line_sensor.reflection())

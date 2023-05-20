@@ -22,11 +22,11 @@ robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
 # Calculate the white/black threshold using the midpoint.
 BLACK = 8
-WHITE = 45
+WHITE = 40
 threshold = (BLACK + WHITE)/2
 
 # BASIC
-FORWARD_SPEED = 100
+FORWARD_SPEED = 80
 TURN_SPEED = 100
 # while True will loop forever
 # while True:
@@ -41,29 +41,29 @@ TURN_SPEED = 100
 
 # MORE ADVANCED
 # Using a P controller
-P = 3
+P = 2.5
 D = 2
 P2 = 4
 D2 = 4
 prev_deviation = 0
 # # while True will loop forever
-# while True:
-    
-#     deviation = line_sensor.reflection() - threshold
-#     turn_rate = P * deviation
-#     robot.drive(FORWARD_SPEED, turn_rate)
-
-#     #wait(5)
-
 while True:
     
     deviation = line_sensor.reflection() - threshold
-    diff = deviation-prev_deviation
+    turn_rate = P * deviation
+    robot.drive(FORWARD_SPEED, turn_rate)
 
-    turn_rate = P * deviation + D*diff
-    forward_speed = 200 - (P2 * abs(deviation) + D2*diff)
-    robot.drive(forward_speed, turn_rate)
-
-    prev_deviation = deviation
-    
     #wait(5)
+
+# while True:
+    
+#     deviation = line_sensor.reflection() - threshold
+#     diff = deviation-prev_deviation
+
+#     turn_rate = P * deviation + D*diff
+#     forward_speed = 200 - (P2 * abs(deviation) + D2*diff)
+#     robot.drive(forward_speed, turn_rate)
+
+#     prev_deviation = deviation
+    
+#     #wait(5)

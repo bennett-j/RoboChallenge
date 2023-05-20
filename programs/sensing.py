@@ -20,8 +20,8 @@ line_sensor = ColorSensor(Port.S3)
 robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
 # Calculate the white/black threshold using the midpoint.
-BLACK = 9
-WHITE = 85
+BLACK = 8
+WHITE = 45
 threshold = (BLACK + WHITE)/2
 
 # While the reflection is brighter than the threshold (i.e. white), drive forwards
