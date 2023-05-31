@@ -10,5 +10,13 @@
 
 - derivative didn't seem to be that useful when I briefly tried it
 
+```
+from pybricks.tools import wait
+```
+also robot.stop() both useful in moving the robot around
+
+- taken the approach of not explaining too much of the code in the instruction sheet, believing that is better done by a demonstrator face to face.
+
+
 # Ideas
 - control the forward speed (faster when lower error?)
