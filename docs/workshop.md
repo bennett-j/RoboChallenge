@@ -46,39 +46,56 @@ Great, you've written your first program. Now we need to upload it to the robot 
 
 ## Getting the robot to move
 
-It would be inconvenient if we had to control the robot through the motor speeds individually so instead we use `DriveBase` which provides some useful functions.
+It would be inconvenient if we had to control the robot through the motor speeds individually so instead we use `DriveBase` which provides some useful functions to control the robot.
+
+1. Open the file `moving.py`. You will see we have added the line `robot = DriveBase(...)`. Using the functions below, attempt the following movements.
 
 ```
-straight()
-turn()
-drive()
+robot.straight(distance)
 ```
+Drive the robot in a straight line for the given distance in mm.
+```
+robot.turn(angle)
+```
+Turn the robot on the spot the given angle in degrees (°).
+```
+robot.drive(drive_speed, turn_rate)
+```
+The robot will drive forwards at the speed `drive_speed` and turn at the speed `turn_rate`. This function starts the robot moving and it will continue until another command is given.
 
-- do some explaining
-- say we previously moved motors individually but that's inconvenient
-- we use `objects` that help us out. We will use `DriveBase`
-- explain how to set up
-- and what functionality it gives (i.e. which functions)
-- then set some movement challenges
-
+### Movements
 1. Drive forwards 1 metre
 1. Drive backwards 1 metre
 1. Turn 180° on the spot both ways
 1. Drive in a square
 1. Drive in a circle
 
-> Challenge: get the robot to move by controlling the motors without `DriveBase`
+> Hint: values can be negative.
+
+> Challenge: get the robot to move by controlling the motors without `DriveBase`.
 
 
 
 ## Sensing
 
+Did the robot finish exactly where it started when you drove in a square? The robot doesn't know where it is and its like you being blindfolded. To help with this, we use *_sensors_* on robots. In this part, we'll use the reflectance sensor. It shines some light onto the floor beneath it and measures how much is reflected, if the floor is light (white) it will have a high reflectance but if it's dark (black) the reflectance will be low.
 
-1. Use the script `threshold-test.py` to determine the reflectance of the white background and the black line and make a note of these.
+1. Use the script `threshold-test.py` to determine the reflectance of the white background and the black line and make a note of these. 
 
+You will see in the program we have added the sensor with the line 
+```
+line_sensor = ColorSensor(Port.S3)
+```
+and that we measure the reflectance and show it on the robot's screen with
+```
+ev3.screen.print(line_sensor.reflection())
+```
 
+2. Now open `sensing.py` and input the values you measured for `BLACK` and `WHITE`.
+1. Put a start and end line on the floor 1 metre apart. 
+1. Get the robot to drive until it gets to the finish line by running the program.
+1. Examine the code and see if you can explain to a demonstrator how it works.
 
-Practise: put a start and end line on the floor 1 metre apart. Get the robot to drive until it gets to the line.
 
 ## Racing
 Now let's see if we can get our robot to race around the track by following the line!
