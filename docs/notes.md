@@ -16,6 +16,7 @@ from pybricks.tools import wait
 also robot.stop() both useful in moving the robot around
 
 - taken the approach of not explaining too much of the code in the instruction sheet, believing that is better done by a demonstrator face to face.
+- with `sensing.py` students will probably hold the robot in the air when starting and find no wheels turn when they put it down. That is because the sensor sees black when there is no surface in front of it and therefore stops instantly. The robot needs to be on the floor when the program starts.
 
 
 # Ideas
