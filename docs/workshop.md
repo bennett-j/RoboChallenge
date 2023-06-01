@@ -2,14 +2,14 @@
 
 Welcome to your robot workshop! Today, we're going to use the LEGO® MINDSTORMS® EV3 robot to have some fun with robotics.
 
-![Image of Robot](/assets/robot_overview.jpg)
+![Image of Robot](assets/robot_overview.jpg)
 
 ## Getting Started
 ### The Robot
 
 Let's turn the robot on. If the light behind the middle button is green then you're good to go. If there are no lights, press the middle button and wait for it to turn on. This could take a minute, so while you're waiting read on.
 
-![Image of controls](/assets/ev3brick_labelled.png)
+![Image of controls](assets/ev3brick_labelled.png)
 
 You will see the robot has two wheels (that it uses to move) and a range of sensors (we'll get to them later) all held together by lego. At the centre is a big box that we call the `brick`; it tells every other part of the robot what to do. At this stage, robots are just a pile of lego and electronics - not very intelligent - until we tell them what to do. This requires a `program`. 
 
@@ -17,7 +17,7 @@ You will see the robot has two wheels (that it uses to move) and a range of sens
 Let's run a program.
 Use the buttons to navigate `File browser > programs > starting.py`. Clicking `starting.py` will "run" that program. You should hear the robot say "Hello World", and turn a wheel! Press the `back` button to stop the program.
 
-![Image of file structure](/assets/run_program_manual.png)
+![Image of file structure](assets/run_program_manual.png)
 
 ### Creating a program
 Next we want to be able to write our own programs to get the robot to do what we want. You will write the code on the laptop using Visual Studio Code which is what students and many professionals use to write code.
@@ -44,7 +44,7 @@ Great, you've written your first program. Now we need to download it to the robo
 
 > Note: the robot will start running the program whilst still plugged in. You can uplug it once it has finished downloading and you can re-run the program unplugged as per the earlier instructions to run a program.
 
-![Connecting to EV3](/assets/connecting_ev3.png)
+![Connecting to EV3](assets/connecting_ev3.png)
 
 ## Getting the robot to move
 
@@ -105,9 +105,7 @@ Now let's see if we can get our robot to race around the track by following the 
 1. Read the comments that explain how the program works.
 1. Adjust `FORWARD_SPEED` and `P` so that the robot can complete the racetrack!
 
-Note: the robot follows the edge of a line.
-The `threshold` is defined as grey, the average of white and black. If the black line is on the left and the white background on the right, when the sensor sees more white than the threshold it needs to turn to the left to find the line.
+> Note: the robot follows the edge of a line (not the line itself). The `threshold` is defined as grey, the average of measured white and black. If the black line is on the left and the white background on the right, when the sensor sees more white than the threshold so it turns to the left to find the line and the opposite for when it sees too much black. This is why the robot can only follow one side of the line.
 
-# Finishing
-Congratulations for completing this workshop
-Turn off robot and PC
+## Finishing
+Congratulations for completing this workshop!
