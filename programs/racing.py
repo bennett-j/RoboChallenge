@@ -26,19 +26,7 @@ WHITE = 40
 threshold = (BLACK + WHITE)/2
 
 # Set forward speed
-FORWARD_SPEED = 80
-
-# BASIC
-# TURN_SPEED = 100
-# while True will loop forever
-# while True:
-    
-#     # if white, turn right
-#     if line_sensor.reflection() > threshold:
-#         robot.drive(FORWARD_SPEED, TURN_SPEED)
-#     else: # it's black, turn left
-#         robot.drive(FORWARD_SPEED, -TURN_SPEED)
-
+FORWARD_SPEED = 50
 
 # Gain is a multiplier for how sensitive the robot turns according to the deviation.
 # Bigger number => robot will turn more per deviation
@@ -53,3 +41,15 @@ while True:
     
     # Update the robot's speeds
     robot.drive(FORWARD_SPEED, turn_rate)
+
+
+# BASIC
+# TURN_SPEED = 100
+# while True will loop forever
+# while True:
+    
+#     # if white, turn right
+#     if line_sensor.reflection() > threshold:
+#         robot.drive(FORWARD_SPEED, TURN_SPEED)
+#     else: # it's black, turn left
+#         robot.drive(FORWARD_SPEED, -TURN_SPEED)
