@@ -24,6 +24,7 @@ also robot.stop() both useful in moving the robot around
 git clone <some repo>
 between each group do `git reset --hard` -this will take the working directory back to the most recent commit. This is great unless they somehow commit something.
 Then do `git reset --hard origin/HEAD` which will take you back to the point of the clone (or the latest pull). Alternatively, do `git log --oneline` and find the hash of the commit you want to refert to and do `git reset --hard <commithash>` - do this especially if you want to keep some of the local commits.
+Instead of origin/HEAD, probably need origin/BRANCHNAME. Also give guidance on git checkout to change branch.
 
 # Ideas
 - control the forward speed (faster when lower error?)
