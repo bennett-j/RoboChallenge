@@ -8,7 +8,7 @@ from pybricks.tools import wait
 
 # Initialize the EV3 Brick and beep to notify.
 ev3 = EV3Brick()
-ev3.speaker.beep
+ev3.speaker.beep()
 
 # Initialize the motors.
 right_motor = Motor(Port.B)
