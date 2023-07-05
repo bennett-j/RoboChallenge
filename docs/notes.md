@@ -5,9 +5,8 @@ The main idea behind the session is to introduce the idea that robots need senso
 
 ## Start of the day
 - Layout laptop, charger, cable, robot, worksheet at each location
-- make racetrack(s) - check whether white or black tape is best
+- make racetrack(s) with electrical tape - check whether white or black tape is best. You may need to wipe the floor clean if it is dirty/dusty.
 - make some lines (for sensing)
-
 
 ## Start of each session
 - Open VSCode
