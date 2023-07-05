@@ -6,7 +6,7 @@ The main idea behind the session is to introduce the idea that robots need senso
 ## Start of the day
 - Layout laptop, charger, cable, robot, worksheet at each location
 - make racetrack(s) - check whether white or black tape is best
-- make some lines (for sensing)
+- make some lines (for sensing) near each robot
 
 
 ## Start of each session
@@ -30,6 +30,7 @@ Specifically from the front, do these:
     > "Well done on what you've all achieved today. We hope you enjoyed yourself and have understood a little of how robots work and one of the ways in which they can see the world. You probably all experienced the challenge of tuning the robot to complete the racetrack quickly but accurately. Challenges such as this - (maybe not robot racers but) of how to complete a task quickly and accurately."
     - You could ask some of the students to tell the class of their experience or if they did something special.
     - Maybe explain to the whole class how the algorithm works.
+    - At the end or before, you could show them some videos of other line following robots and discuss the differences.
 
 ### Starting
 There aren't any solutions. The purpose is just to get them running and downloading code to the robot. They can't do anything wrong if they follow the sheet - but they probably won't so you need to be very proactive in helping them through this bit.
@@ -102,12 +103,13 @@ You can try and discuss with them how the robot is working. [explanation pending
 | robot dies | change batteries |
 | weird sensor readings | check it is parallel and correct distance from surface (about 5 mm) |
 | EV3DEV device browser not showing in explorer panel | try opening a FOLDER (not a single file)|
+| something else | Look at the EV3 MicroPython docs https://pybricks.com/ev3-micropython/index.html which are also accessible locally by clicking on the EV3 extension in VSCode then clicking open user guide. |
 
 ## Extensions
 Some _challenges_ are suggested throughout the worksheet
 
 Other ideas to extend racing:
-- implement bang bang control 
+- implement bang bang control (this is more basic than the P controller implemented in `racing.py`)
     ```
     FORWARD_SPEED = 80
     TURN_SPEED = 100
@@ -136,15 +138,33 @@ Other ideas to extend racing:
         robot.drive(FORWARD_SPEED, turn_rate)
 - implement a controller on forward speed (in addition to steering) so it slows for corners (I haven't got this working smoothly yet)
 
+# Kit List
+- Per station (2 students per station)
+    - EV3 robot (Lego Mindstorms) equipped with reflectance sensor.
+    - Laptop (see [setup](#laptop-setup))
+    - Laptop charger
+    - Cable to connect robot to laptop
+    - Printed [worksheet](/docs/roboracers.pdf)
+- Black and white tape for racetrack (white incase the table/surface is too dark for black)
+- Spare batteries
 
-# Setup (Laptop)
-- VSCode
-- Mindstorms extension
-- pybricks, pybricks stubs
-- git
-- git clone <the repo> (then git checkout branch)
-
-
+# Laptop Setup
+The laptop will need the following installed and downloaded.
+- Visual Studio Code (VSCode) https://code.visualstudio.com/
+- VSCode Extension: LEGO® MINDSTORMS® EV3 MicroPython https://marketplace.visualstudio.com/items?itemName=lego-education.ev3-micropython
+- Install `pybricks-stubs` package to ensure proper Intellisense highlighting and completion.
+    ```
+    pip install pybricks-stubs
+    ```
+- Install Git https://git-scm.com/downloads
+- Clone this repository
+    ```
+    git clone https://github.com/bennett-j/RoboChallenge.git
+    ```
+    Then checkout the `RoboRacers` branch
+    ```
+    git checkout RoboRacers
+    ```
 
 
 
@@ -160,11 +180,6 @@ Other ideas to extend racing:
 
 - the robot will spit out an error log that can be uploaded to the pc (from the robot) and viewed in a text editor
 
-- derivative didn't seem to be that useful when I briefly tried it
-
-```
-from pybricks.tools import wait
-```
 also robot.stop() both useful in moving the robot around
 
 - taken the approach of not explaining too much of the code in the instruction sheet, believing that is better done by a demonstrator face to face.
@@ -177,6 +192,3 @@ git clone <some repo>
 between each group do `git reset --hard` -this will take the working directory back to the most recent commit. This is great unless they somehow commit something.
 Then do `git reset --hard origin/HEAD` which will take you back to the point of the clone (or the latest pull). Alternatively, do `git log --oneline` and find the hash of the commit you want to refert to and do `git reset --hard <commithash>` - do this especially if you want to keep some of the local commits.
 Instead of origin/HEAD, probably need origin/BRANCHNAME. Also give guidance on git checkout to change branch.
-
-# Ideas
-- control the forward speed (faster when lower error?)
