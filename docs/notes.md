@@ -11,7 +11,7 @@ The main idea behind the session is to introduce the idea that robots need senso
 ## Start of each session
 - Open VSCode
 - Open the `RoboChallenge` folder
-- In the terminal (command prompt, not powershell), choose the `RoboRacers` branch (`git checkout RoboRacers`) and execute `git reset --hard` to take back to latest commit (if latest commit isn't the correct one, do this...[something with origin/HEAD or origin/branchname])
+- In the terminal (command prompt, not powershell), choose the `RoboRacers` branch (`git checkout RoboRacers`) and execute `git reset --hard` to take back to the latest commit (see [git notes](#git-notes) for explanation and troubleshooting).
 - (turn on the robot) Upload the code (F5 or Fn+F5)
 - Run `starting.py` on the robot to test
 
@@ -65,12 +65,13 @@ Solutions
     robot.drive(100,60)
     ```
     The difference is, robot.drive() is non-blocking (unlike straight and turn) so the line will execute (instantaneously) and then the next line executed and if there is no line the program will end. HOWEVER, in /.vscode/launch.json, interactive terminal is set true which means the program will(should) stay running.
-    to ensure this works in a purer sense possible solutions are
+
+    To ensure this works in a purer sense possible solutions are
     ```
     robot.drive(100,60)
     wait(5000) # wait 5 seconds
     ```
-    where using wait() for pybricks.tools (import) makes the program stay running for 5 s. Perhaps purer solution is:
+    where using wait() for pybricks.tools (import) makes the program stay running for 5 s. Perhaps a purer solution is:
     ```
     while True:
         robot.drive(100,60)
@@ -78,16 +79,16 @@ Solutions
     will drive continuously
 
 ### Sensing
-If they run the program whilst holding the robot in the air, nothing will happen because there's no surface infront of the sensor and it sees black so stops and the program ends.
+If they run the program whilst holding the robot in the air, nothing will happen because there's no surface in front of the sensor and it sees black so stops and the program ends.
 
 ### Racing
 Starting values forward = 50, turn gain = 2.5. I've found turn can be increased to about 4 before it becomes silly. Forward speed can comfortably be increased above 100, maybe even above 200 depending on the radii of the turns.
 
-The goal here is trial and error. Don't tell them what values to use. Get them to change them and observe the behaviour of the robot - and repeat! Eventually they will get it as good as they can (hardware and choice of control algorithm become limiting factor).
+The goal here is trial and error. Don't tell them what values to use. Get them to change them and observe the behaviour of the robot - and repeat! Eventually they will get it as good as they can (hardware and choice of control algorithm become limiting factors).
 
-You can try and discuss with them how the robot is working. [explanation pending]
- - why does it follow the edge of one line
- - why only one side of the line
+You can try and discuss with them how the robot is working. Explanation for leaders [here](#explanation-and-further-reading-for-leaders).
+ - why does it follow the edge of one line?
+ - why only one side of the line?
  - does it turn left/right better? (sensor placement)
 
 
@@ -97,13 +98,15 @@ You can try and discuss with them how the robot is working. [explanation pending
 - put everything in boxes
 
 ## Troubleshooting
-| issue | solution |
+| Issue | Solution |
 |-------|-----------|
-| robot dies | change batteries |
-| weird sensor readings | check it is parallel and correct distance from surface (about 5 mm) |
-| EV3DEV device browser not showing in explorer panel | try opening a FOLDER (not a single file)|
-| something else | Look at the EV3 MicroPython docs https://pybricks.com/ev3-micropython/index.html which are also accessible locally by clicking on the EV3 extension in VSCode then clicking open user guide. |
-
+| Robot dies | Change batteries |
+| Weird sensor readings | Check it is parallel and correct distance from surface (about 5 mm) |
+| EV3DEV device browser not showing in explorer panel | Try opening a FOLDER (not a single file)|
+| Cannot connect | Ensure the robot is on (centre light is green) |
+| `sensing.py` does nothing | Students will probably hold the robot in the air when starting and find no wheels turn when they put it down. That is because the sensor sees black when there is no surface in front of it and therefore stops instantly. The robot needs to be on the floor when the program starts. |
+| Something else | Look at the EV3 MicroPython docs https://pybricks.com/ev3-micropython/index.html which are also accessible locally by clicking on the EV3 extension in VSCode then clicking open user guide. |
+| Something else | The robot will spit out an error log that can be uploaded to the pc (from the robot) and viewed in a text editor. |
 ## Extensions
 Some _challenges_ are suggested throughout the worksheet
 
@@ -137,6 +140,11 @@ Other ideas to extend racing:
         robot.drive(FORWARD_SPEED, turn_rate)
 - implement a controller on forward speed (in addition to steering) so it slows for corners (I haven't got this working smoothly yet)
 
+## Explanation and further reading (for leaders)
+(Work-in-progress)
+- Sensors facilitate closed-loop control
+- Control algorithms, control theory, PID control, bang-bang control
+
 # Kit List
 - Per station (2 students per station)
     - EV3 robot (Lego Mindstorms) equipped with reflectance sensor.
@@ -165,29 +173,11 @@ The laptop will need the following installed and downloaded.
     git checkout RoboRacers
     ```
 
+# Git Notes
+This repository is organised such that the `main` branch is for development and leaders' notes and other branches are for a specific _RoboChallenge_ session. On the laptop, you must ensure the correct branch/session has been checked out.
+```
+git checkout <branch-name>
+```
 
-
-
-# Temp notes
-- Laptop should be on and VS code running, but not essential.
-- Ensure the hello world script is on the robot.
-- Best to turn the robot on before but not essential.
-
-- pybricks-stubs for intellisense
-
-- the robot needs to be on (green light) to connect from vscode
-
-- the robot will spit out an error log that can be uploaded to the pc (from the robot) and viewed in a text editor
-
-also robot.stop() both useful in moving the robot around
-
-- taken the approach of not explaining too much of the code in the instruction sheet, believing that is better done by a demonstrator face to face.
-- with `sensing.py` students will probably hold the robot in the air when starting and find no wheels turn when they put it down. That is because the sensor sees black when there is no surface in front of it and therefore stops instantly. The robot needs to be on the floor when the program starts.
-
-- Racing: forward speed 50 and P 2.5 to start with can increase forward speed to over 100 depending on corner radii and P > 4 can be a bit jerky
-
-## to open/setup/files
-git clone <some repo>
-between each group do `git reset --hard` -this will take the working directory back to the most recent commit. This is great unless they somehow commit something.
-Then do `git reset --hard origin/HEAD` which will take you back to the point of the clone (or the latest pull). Alternatively, do `git log --oneline` and find the hash of the commit you want to refert to and do `git reset --hard <commithash>` - do this especially if you want to keep some of the local commits.
-Instead of origin/HEAD, probably need origin/BRANCHNAME. Also give guidance on git checkout to change branch.
+When first running this session it wasted a lot of time getting students to copy a master folder and rename it and open it and hope none of them messed up the master copy. This also meant it was hard to have a program pre-downloaded to the robots because they would have to change the folder after naming it themselves. Instead, we use `git reset --hard` which will take the working directory back to the most recent commit. This is great unless they somehow commit something.
+In that case, do `git reset --hard origin/<branch-name>` (e.g. `git reset --hard origin/RoboRacers`) (or perhaps `git reset --hard origin/HEAD` might work). This should take you back to the point of the clone (or the latest pull). Alternatively, do `git log --oneline` and find the hash of the commit you want to revert to and do `git reset --hard <commithash>`.
