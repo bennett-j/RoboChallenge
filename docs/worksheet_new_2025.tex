@@ -217,25 +217,69 @@ robot.straight(distance)
 \end{lstlisting}
 We don't actually include the word 'distance'. Instead, you need to replace it with a number to represent the \code{distance} you want the robot to move. This \code{distance} is in mm.
 
+We must replace the \emph{word} \code{distance} with a \emph{number}. Here, it is the distance in millimeters that we want to move. 
+
+Look at the bottom of \vb{moving.py} for an example.
+
 To turn the robot on the spot, we(°), use:
 \begin{lstlisting}[style=moving]
 robot.turn(angle)
 \end{lstlisting}
 Here, you replace \code{angle} with the number of degrees you want the robot to turn.
 
-\vspace{0.5cm}
-\tipbox{Hint: values can be negative.}
+\vspace{0.3cm}
+\tipbox{Hint: Values can be negative.\newline Bonus hint: You can list commands one after another.}
 
-\vspace{1cm}
+\vspace{0.6cm}
 \section*{Trial run along the racetrack}
-Using the commands \code{robot.straight(distance)} and \code{robot.turn(angle)}, see how far along the racetrack you can get in 5 minutes.
-\vspace{0.5cm}
-\tipbox{Hint: You can list the commands one after another.}
+Using the commands \code{robot.straight(distance)} and \code{robot.turn(angle)}, see how far along the racetrack you can get in 5 minutes. If you get to the end, well done! Tell the session leader.
+
+Here are the rules for the tournament!
+\begin{enumerate}
+    \item Robot must start with wheels behind the start line.
+    \item Robot must not leave the road or crash into trees.
+    \item Robot's wheels must cross the finish line for a valid track completion.
+\end{enumerate}
 
 \newpage
-\section*{Sensing}
-Did the robot finish exactly where it started when you drove in a square? The robot has no way to "see" where it is. Just like you trying to walk in a big square whilst blindfolded. To let our robots "see", we use \emph{sensors} on them. In this part, we'll use the reflectance sensor. It shines some light onto the floor beneath it and measures how much is reflected, if the floor is light (white) it will have a high reflectance but if it's dark (black) the reflectance will be low.
+\section*{Using the Reflectance Sensor}
+You may have noticed that it was difficult and time consuming to complete the race track using manual commands. Robots use sensors to help make their own decisions by seeing the world around them, rather than us having to tell them every little thing down to the mm.
 
+\thinkbox{Imagine trying to walk in a square with your eyes closed. That would be difficult! It would be much easier if you could see. By using the sensor, we are allowing the robot to ``see".}
+
+The robots you are using have \textbf{reflectance sensors}. You should see it sticking out of the front of the robot, shining a red light onto the table. If you can't see this, ask your session leader for help.
+
+The sensor shines a light onto the floor underneath it, and measures how much is reflected back. If the floor is a light colour (for example, white) it will have a \textbf{high} reflectance value but if it's dark (for example black) the reflectance will be \textbf{low}.
+
+Let's make sure the sensor is working.
+% make all numbers sequential ?
+\begin{enumerate}
+    \item On the robot, find the file \vb{sensing.py}.
+    \item Put the robot at the start line on the piece of paper on your desk, with the wheels on the line.
+    \item Run the \vb{sensing.py} file on the robot. It should stop when it reaches the black finish line.
+\end{enumerate}
+
+% introduce exploring the sensor values and how it works
+Your task now is to make the robot stop at the grey line in the middle of the paper. Let's measure the reflectance of the grey line.
+
+\begin{enumerate}
+    \item On the robot, run \vb{threshold\_measurer.py}. You will see lots of numbers on the robot's screen - these are the reflectance value from the sensor.
+    \item Move the robot (with your hand) and see how the values change when the sensor is over different coloured surfaces.
+    \item To stop the program, press the back button (top left button) on the robot.
+\end{enumerate}
+
+% lets see how we can use these values to stop at grey line, set challenge
+\thinkbox{think about ittttt}
+To make the robot stop at the grey line, we need to change some code.
+
+% next page ? more steps
+\begin{enumerate}
+    \item On the laptop, open \vb{sensing.py}.
+    \item somehow encourage them to figure out to put the grey value in the file
+    \item Put the robot at the start line on the piece of paper on your desk, with the wheels on the line. Run the \vb{sensing.py} file on the robot. What happens? 
+\end{enumerate}
+
+\newpage
 \begin{enumerate}
 \item Open the script \vb{threshold-test.py}. You will see in the program we have added the sensor with the line  
 \begin{lstlisting}[style=moving]
@@ -254,11 +298,14 @@ ev3.screen.print(line_sensor.reflection())
 \item Examine the code and see if you can explain to a demonstrator how it works. 
 \end{enumerate}
 
-\section*{Racing}
+\newpage
+\section*{The Final Round}
 Now our robot can see, it's time to get our robot to race the track by following the line!
 
 \thinkbox{Challenge: Pause before you look at the program and see if you can work out an \emph{algorithm} for the robot to follow the line.}
 
+% dont make them input any values into racing.py, hardcode them
+% the experimentation here is about speed and turn gain
 \begin{enumerate}
 \item Open \vb{racing.py} and input the same values for \code{LINE\_REF} and \code{BACKGROUND\_REF}. 
 \item Run the program and put your robot on the racetrack. 
