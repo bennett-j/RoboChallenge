@@ -9,6 +9,7 @@ from pybricks.parameters import Port
 ev3 = EV3Brick()
 
 # Robot say "Hello World".
+ev3.speaker.set_volume(100)
 ev3.speaker.say("Hello World!")
 
 # Initialise the motors.
