@@ -8,6 +8,16 @@ on:
   push:
     tags:
       - '*/v*'  # Matches: RoboRacers/v1.0, sensor_challenge/v2.1, etc.
+  workflow_dispatch:
+    inputs:
+      session_name:
+        description: 'Session name (e.g., RoboRacers)'
+        required: true
+        default: 'RoboRacers'
+      version:
+        description: 'Version (e.g., v1.0)'
+        required: true
+        default: 'v1.0'
 
 jobs:
   release:
@@ -26,10 +36,24 @@ jobs:
         id: tag
         run: |
           set -e
-          TAG=${{ github.ref_name }}
-          SESSION=$(echo "$TAG" | cut -d'/' -f1)
-          VERSION=$(echo "$TAG" | cut -d'/' -f2)
-          BRANCH="session-${SESSION}"
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            SESSION="${{ github.event.inputs.session_name }}"
+            VERSION="${{ github.event.inputs.version }}"
+          else
+            TAG=${{ github.ref_name }}
+            SESSION=$(echo "$TAG" | cut -d'/' -f1)
+            VERSION=$(echo "$TAG" | cut -d'/' -f2)
+          fi
+          # Check if this is a test release
+          if [[ "$VERSION" == *"test"* ]]; then
+            echo "is_test=true" >> $GITHUB_OUTPUT
+            echo "This is a test release - will be created as draft"
+            BRANCH="session-${SESSION}-test"
+          else
+            echo "is_test=false" >> $GITHUB_OUTPUT
+            echo "This is a production release"
+            BRANCH="session-${SESSION}"
+          fi
           echo "session=$SESSION" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
@@ -41,6 +65,9 @@ jobs:
           set -e
           sudo apt-get update
           sudo apt-get install -y texlive-latex-base texlive-latex-extra
+          # Install additional packages using tlmgr
+          sudo tlmgr update --self
+          sudo tlmgr install fontawesome5 awesomebox soul listings fancyhdr enumitem parskip xparse etoolbox lmodern inputenc
 
       # Build the worksheet PDF
       - name: Build worksheet PDF
@@ -48,6 +75,8 @@ jobs:
           set -e
           cd sessions/${{ steps.tag.outputs.session }}/worksheet
           export TEXINPUTS=../../../shared/worksheets:
+          export SESSION_VERSION="${{ steps.tag.outputs.version }}"
+          export SESSION_NAME="${{ steps.tag.outputs.session }}"
           pdflatex -interaction=nonstopmode -output-directory=. main.tex
           # Clean up auxiliary files
           rm -f main.aux main.log main.out
@@ -161,7 +190,7 @@ jobs:
           files: |
             /tmp/release/${{ steps.tag.outputs.session }}.pdf
             $GITHUB_WORKSPACE/${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip
-          draft: false
+          draft: ${{ steps.tag.outputs.is_test == 'true' }}
           prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

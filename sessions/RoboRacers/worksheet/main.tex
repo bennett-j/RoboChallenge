@@ -8,7 +8,7 @@
 
 \usepackage{robochallenge}
 
-\newcommand{\sessionversion}{RoboRacers v1.0}
+\newcommand{\sessionversion}{\ifcsname SESSION_NAME\endcsname\SESSION_NAME\else \texttt{<session\_name>}\fi \ifcsname SESSION_VERSION\endcsname\SESSION_VERSION\else v?.?\fi}
 
 \title{RoboRacers: Can You Stay On The Track?}
 \author{RoboChallenge Contributors}
