@@ -64,10 +64,12 @@ jobs:
         run: |
           set -e
           sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-latex-extra
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-extra
+          # Initialize tlmgr user mode
+          tlmgr init-usertree
           # Install additional packages using tlmgr
-          sudo tlmgr update --self
-          sudo tlmgr install fontawesome5 awesomebox soul listings fancyhdr enumitem parskip xparse etoolbox lmodern inputenc
+          tlmgr update --self
+          tlmgr install fontawesome5 awesomebox soul listings fancyhdr enumitem parskip xparse etoolbox lmodern inputenc
 
       # Build the worksheet PDF
       - name: Build worksheet PDF
