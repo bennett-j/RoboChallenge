@@ -119,8 +119,8 @@ jobs:
           # Remove all files from staging (clean slate)
           git rm -rf .
           
-          # Copy deployment files into working directory
-          cp -r /tmp/release/* .
+          # Copy deployment files into working directory (including hidden files)
+          cp -r /tmp/release/. .
           
           # Stage all files
           git add .

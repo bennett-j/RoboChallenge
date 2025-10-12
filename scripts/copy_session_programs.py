@@ -18,7 +18,7 @@ def main():
     
     # Copy files listed in session.yaml plus .vscode and LICENSE
     files_to_copy = config.get("files", [])
-    files_to_copy.append(".vscode/")
+    files_to_copy.append(".vscode")
     files_to_copy.append("LICENSE")
     
     for file in files_to_copy:
