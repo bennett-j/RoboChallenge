@@ -1,0 +1,184 @@
+# .github/workflows/release.yml
+# Triggered when you push a tag like: robo_racers/v1.0
+# Creates a clean deployment branch with built PDFs and code files and creates a release
+
+name: Create Release
+
+on:
+  push:
+    tags:
+      - '*/v*'  # Matches: RoboRacers/v1.0, sensor_challenge/v2.1, etc.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Checkout the full repo at the tag
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for git operations
+
+      # Parse the tag to extract session name and version
+      # Tag format: RoboRacers/v1.0
+      # Outputs: session=RoboRacers, version=v1.0
+      - name: Parse tag
+        id: tag
+        run: |
+          set -e
+          TAG=${{ github.ref_name }}
+          SESSION=$(echo "$TAG" | cut -d'/' -f1)
+          VERSION=$(echo "$TAG" | cut -d'/' -f2)
+          BRANCH="session-${SESSION}"
+          echo "session=$SESSION" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "branch=$BRANCH" >> $GITHUB_OUTPUT
+          echo "Tag parsed: SESSION=$SESSION, VERSION=$VERSION, BRANCH=$BRANCH"
+
+      # Install pdflatex for building worksheets
+      - name: Install LaTeX
+        run: |
+          set -e
+          sudo apt-get update
+          sudo apt-get install -y texlive-latex-base texlive-latex-extra
+
+      # Build the worksheet PDF
+      - name: Build worksheet PDF
+        run: |
+          set -e
+          cd sessions/${{ steps.tag.outputs.session }}/worksheet
+          export TEXINPUTS=../../../shared/worksheets:
+          pdflatex -interaction=nonstopmode -output-directory=. main.tex
+          # Clean up auxiliary files
+          rm -f main.aux main.log main.out
+          echo "✓ Built ${{ steps.tag.outputs.session }} worksheet PDF"
+
+      # Create a temporary directory with deployment files
+      - name: Prepare deployment files
+        run: |
+          set -e
+          mkdir -p /tmp/release
+          
+          # Read session.yaml to get list of files to include
+          python3 scripts/copy_session_programs.py ${{ steps.tag.outputs.session }}
+          
+          # Copy and rename the built PDF
+          cp sessions/${{ steps.tag.outputs.session }}/worksheet/main.pdf \
+             /tmp/release/${{ steps.tag.outputs.session }}.pdf
+
+          # Create a session README.md
+          python3 scripts/make_session_readme.py ${{ steps.tag.outputs.session }} ${{ steps.tag.outputs.version }}
+          
+          echo "✓ Prepared deployment files"
+          ls -la /tmp/release/
+
+      # Create a clean deployment branch with no history
+      - name: Create deployment branch
+        run: |
+          set -e
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          
+          # Create orphan branch (completely clean history)
+          git checkout --orphan ${{ steps.tag.outputs.branch }}
+          
+          # Remove all files from staging (clean slate)
+          git rm -rf .
+          
+          # Copy deployment files into working directory
+          cp -r /tmp/release/* .
+          
+          # Stage all files
+          git add .
+          
+          # Commit
+          git commit -m "Release: ${{ steps.tag.outputs.session }} ${{ steps.tag.outputs.version }}"
+          
+          echo "✓ Created deployment branch: ${{ steps.tag.outputs.branch }}"
+
+      # Push the deployment branch
+      - name: Push deployment branch
+        run: |
+          set -e
+          git push origin ${{ steps.tag.outputs.branch }}
+          echo "✓ Pushed to origin/${{ steps.tag.outputs.branch }}"
+
+      # Create a zip file of the .py code files
+      - name: Create release zip
+        run: |
+          set -e
+          cd /tmp/release
+          zip -r ${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip *.py
+          mv ${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip $GITHUB_WORKSPACE/
+          echo "✓ Created zip: ${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip"
+          ls -lh $GITHUB_WORKSPACE/${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip
+
+      # Generate release notes from git log
+      - name: Generate release notes
+        id: notes
+        run: |
+          set -e
+          PREV_TAG=$(git describe --tags --abbrev=0 ${{ github.ref_name }}^ 2>/dev/null || echo "")
+          
+          if [ -z "$PREV_TAG" ]; then
+            NOTES="Initial release"
+          else
+            # Include commits to this session OR shared resources
+            NOTES=$(git log $PREV_TAG..${{ github.ref_name }} --oneline -- \
+              sessions/${{ steps.tag.outputs.session }}/ \
+              shared/ \
+              2>/dev/null || echo "See commit history for changes")
+          fi
+          
+          echo "notes<<EOF" >> $GITHUB_OUTPUT
+          echo "$NOTES" >> $GITHUB_OUTPUT
+          echo "EOF" >> $GITHUB_OUTPUT
+          
+          echo "Release notes generated:"
+          echo "$NOTES"
+
+      # Create a GitHub Release with attachments
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: "${{ steps.tag.outputs.session }} ${{ steps.tag.outputs.version }}"
+          body: |
+            Release of **${{ steps.tag.outputs.session }}** version **${{ steps.tag.outputs.version }}**
+            
+            ### Changes in this release:
+            ```
+            ${{ steps.notes.outputs.notes }}
+            ```
+            ## Usage
+            - **Option 1 (recommended):** Use git to checkout the deployment branch:
+              ```bash
+              git fetch origin
+              git checkout ${{ steps.tag.outputs.branch }}
+              ```
+            - **Option 2:** Download the PDF worksheet and zipped programs attached to this release.
+            
+          files: |
+            /tmp/release/${{ steps.tag.outputs.session }}.pdf
+            $GITHUB_WORKSPACE/${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      # Print instructions for using the release
+      - name: Print deployment instructions
+        run: |
+          echo ""
+          echo "=========================================="
+          echo "✅ Release Complete!"
+          echo "=========================================="
+          echo ""
+          echo "Session: ${{ steps.tag.outputs.session }}"
+          echo "Version: ${{ steps.tag.outputs.version }}"
+          echo "Branch:  ${{ steps.tag.outputs.branch }}"
+          echo ""
+          echo "GitHub Release: ${{ github.server_url }}/${{ github.repository }}/releases/tag/${{ github.ref_name }}"
+          echo ""
+          echo "=========================================="
+          echo ""
