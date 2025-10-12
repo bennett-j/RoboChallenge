@@ -84,7 +84,7 @@ jobs:
           
           pdflatex -interaction=nonstopmode -output-directory=. main.tex
           # Clean up auxiliary files
-          rm -f main.aux main.log main.out
+          rm -f main.aux main.log main.out _version.tex
           echo "✓ Built ${{ steps.tag.outputs.session }} worksheet PDF"
 
       # Create a temporary directory with deployment files
