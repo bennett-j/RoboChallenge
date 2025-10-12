@@ -59,15 +59,24 @@ jobs:
           echo "branch=$BRANCH" >> $GITHUB_OUTPUT
           echo "Tag parsed: SESSION=$SESSION, VERSION=$VERSION, BRANCH=$BRANCH"
 
-      # Install pdflatex for building worksheets
-      - name: Install LaTeX
+      - name: Install TeX Live (with tlmgr enabled)
         run: |
           set -e
-          sudo apt-get update
-          sudo apt-get install -y texlive-latex-base texlive-latex-extra texlive-fonts-extra
-          # Initialize tlmgr user mode
-          tlmgr init-usertree
-          # Install additional packages using tlmgr
+          wget http://mirror.ctan.org/systems/texlive/tlnet/install-tl-unx.tar.gz
+          tar -xzf install-tl-unx.tar.gz
+          cd install-tl-*
+          sudo ./install-tl --profile=/dev/stdin <<EOF
+          selected_scheme scheme-small
+          tlpdbopt_install_docfiles 0
+          tlpdbopt_install_srcfiles 0
+          EOF
+          
+          # Add TeX Live to PATH
+          echo "PATH=/usr/local/texlive/2024/bin/x86_64-linux:\$PATH" >> $GITHUB_ENV
+
+      - name: Install required LaTeX packages with tlmgr
+        run: |
+          set -e
           tlmgr update --self
           tlmgr install fontawesome5 awesomebox soul listings fancyhdr enumitem parskip xparse etoolbox lmodern inputenc
 
