@@ -80,6 +80,7 @@ jobs:
           tlmgr update --self
           tlmgr install fontawesome5 awesomebox soul listings fancyhdr enumitem parskip xparse etoolbox lmodern inputenc
 
+
       # Build the worksheet PDF
       - name: Build worksheet PDF
         run: |
