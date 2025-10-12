@@ -1,3 +1,4 @@
-docs/_minted-roboracers/default.pygstyle
-docs/_minted-roboracers/9C5E62E609AF1E5937ECA9BF14DE31D0B161F052A76CF6376AF537C7B88DDCB9.pygtex
-docs/roboracers.synctex.gz
+*.aux
+*.log
+*.out
+*.synctex.gz
