@@ -73,9 +73,15 @@ jobs:
         run: |
           set -e
           cd sessions/${{ steps.tag.outputs.session }}/worksheet
+
+          cat > _version.tex << 'EOF'
+          \newcommand{\sessionversion}{${{ steps.tag.outputs.version }}}
+          \newcommand{\sessionname}{${{ steps.tag.outputs.session }}}
+          EOF
+
           export TEXINPUTS=../../../shared/worksheets:
-          export SESSION_VERSION="${{ steps.tag.outputs.version }}"
-          export SESSION_NAME="${{ steps.tag.outputs.session }}"
+          
+          
           pdflatex -interaction=nonstopmode -output-directory=. main.tex
           # Clean up auxiliary files
           rm -f main.aux main.log main.out
@@ -179,7 +185,7 @@ jobs:
             ${{ steps.notes.outputs.notes }}
             ```
             ## Usage
-            - **Option 1 (recommended):** Use git to checkout the deployment branch:
+            - **Option 1 (recommended):** Use git to checkout the latest deployment branch:
               ```bash
               git fetch origin
               git checkout ${{ steps.tag.outputs.branch }}
@@ -188,7 +194,7 @@ jobs:
             
           files: |
             /tmp/release/${{ steps.tag.outputs.session }}.pdf
-            $GITHUB_WORKSPACE/${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip
+            ${{ steps.tag.outputs.session }}_${{ steps.tag.outputs.version }}.zip
           draft: ${{ steps.tag.outputs.is_test == 'true' }}
           prerelease: false
         env:

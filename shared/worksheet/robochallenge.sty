@@ -3,6 +3,13 @@
 
 \ProvidesPackage{robochallenge}
 
+\IfFileExists{_version.tex}{
+    \input{_version.tex}
+}{
+    \newcommand{\sessionversion}{<version>}
+    \newcommand{\sessionname}{<session>}
+}
+
 % ============================================================================
 % Basic Page Setup
 % ============================================================================
@@ -149,7 +156,7 @@
 % \rhead{\thepage}
 \cfoot{\scriptsize\color{gray}© \the\year \; \@author \quad CC BY-SA 4.0}
 \rhead{\color{gray}\thepage}
-\lhead{\small\color{gray}\sessionversion}
+\lhead{\small\color{gray}\sessionname \sessionversion}
 \renewcommand{\headrulewidth}{0pt}
 
 % First page footer
@@ -160,7 +167,7 @@
     \rule{0.8\textwidth}{0.5pt}
     \vspace{-0.5em}
         
-    This worksheet is for the RoboChallenge session \textit{\sessionversion}.
+    This worksheet is for the RoboChallenge session \textit{\sessionname} \textit{\sessionversion}.
     \\
     Corresponding programs are available in the repository at \texttt{github.com/bennett-j/RoboChallenge}.
     \\
