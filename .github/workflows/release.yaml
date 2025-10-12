@@ -134,8 +134,8 @@ jobs:
       - name: Push deployment branch
         run: |
           set -e
-          git push origin ${{ steps.tag.outputs.branch }}
-          echo "✓ Pushed to origin/${{ steps.tag.outputs.branch }}"
+          git push --force origin ${{ steps.tag.outputs.branch }}
+          echo "✓ Force pushed to origin/${{ steps.tag.outputs.branch }}"
 
       # Create a zip file of the .py code files
       - name: Create release zip
