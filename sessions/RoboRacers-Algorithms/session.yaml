@@ -1,12 +1,12 @@
 name: RoboRacers-Algorithms
-description: This on is designed to make you think! First we get to grips with writing programs that make robots move around. We then understand how a sensor allows the robot to see the world. Finally we design algorithms that tells the robot how to use the sensor information to race along a line.
+description: This one is designed to make you think! First we get to grips with writing programs that make robots move around. We then understand how a sensor allows the robot to see the world. Finally we design algorithms that tell the robot how to use the sensor information to race along a line.
 objectives:
 - Learn how to _create_ and _run_ programs for the robot.
 - Master moving the robot around.
 - Learn how robots can "see" the world with a _reflectance sensor_.
 - Design your own algorithms and write them as a programs to run on the robot.
 - Race around the racetrack and tune the robot so it completes it a well as possible.
-suitability: Suitable for later secondary school ages and above.Understanding of basic programming concepts such as loops and conditionals is required. Mathematically inclined students will find this session more engaging. 
+suitability: Understanding of basic programming concepts such as loops and conditionals is required. Mathematically inclined students will find this session more engaging. Suitable for later secondary school ages and above.
 duration: 60-90 minutes
 authors:
   - James Bennett
