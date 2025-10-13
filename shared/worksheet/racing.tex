@@ -1,0 +1,13 @@
+\section*{Racing}
+Now our robot can see, it's time to get our robot to race the track by following the line!
+
+\thinkbox{Challenge: Pause before you look at the program and see if you can work out an \emph{algorithm} for the robot to follow the line.}
+
+\begin{enumerate}
+\item Open \vb{racing.py} and input the same values for \code{LINE\_REF} and \code{BACKGROUND\_REF}. 
+\item Run the program and put your robot on the racetrack. 
+\item Read the comments that explain how the program works. 
+\item Adjust \code{FORWARD\_SPEED} and \code{TURN\_GAIN} so that the robot can complete the racetrack! 
+\end{enumerate}
+
+\notebox{The robot follows the edge of a line (not the line itself). The \code{threshold} value is calculated to be grey, the average of measured white and black. Suppose the black line is on the left and the white background on the right. When the sensor sees more white than the threshold, the robot neeeds to turn to the left to find the line and the opposite for when it sees too much black. This is why the robot can only follow one side of the line.}

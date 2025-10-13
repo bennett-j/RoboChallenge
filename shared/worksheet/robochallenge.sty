@@ -1,0 +1,179 @@
+% shared/worksheets/robochallenge.sty
+% Shared styling and custom environments for all RoboChallenge worksheets
+
+\ProvidesPackage{robochallenge}
+
+\IfFileExists{_version.tex}{
+    \input{_version.tex}
+}{
+    \newcommand{\sessionversion}{<version>}
+    \newcommand{\sessionname}{<session>}
+}
+
+% ============================================================================
+% Basic Page Setup
+% ============================================================================
+
+\usepackage[margin=1in]{geometry}
+\usepackage{xcolor}
+\usepackage{fancyhdr}
+\usepackage{graphicx}
+\usepackage{xparse}
+\usepackage{etoolbox}
+
+
+% ============================================================================
+% Colours
+% ============================================================================
+
+\definecolor{varblue}{HTML}{9CDCFE}
+\definecolor{constblue}{HTML}{4FC1FF}
+\definecolor{decgreen}{HTML}{4EC9B0}
+\definecolor{funyellow}{HTML}{DCDCAA}
+\definecolor{keypurple}{HTML}{C586C0}
+\definecolor{textorange}{HTML}{CE9178}
+\definecolor{commentgreen}{HTML}{6A9955}
+\definecolor{numgreen}{HTML}{B5CEA8}
+\definecolor{punctyellow}{HTML}{6A9955}
+\definecolor{opwhite}{HTML}{D4D4D4}
+
+\definecolor{background}{HTML}{1F1F1F} %vscode background
+\definecolor{vbbackground}{HTML}{D6D6D6} %grey vb background
+
+
+% ============================================================================
+% Fonts & Typography
+% ============================================================================
+
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+
+\renewcommand{\familydefault}{\sfdefault}  % Use sans-serif throughout
+
+
+% ============================================================================
+% Code Listings
+% ============================================================================
+
+\usepackage{listings}
+\lstset{
+    language=python,
+    basicstyle=\ttfamily\small\color{opwhite},
+    backgroundcolor=\color{background},
+    commentstyle=\color{commentgreen},
+    keywordstyle=\color{keypurple},
+    stringstyle=\color{textorange},
+    showstringspaces=false,
+    breaklines=true,
+}
+
+\lstdefinestyle{moving}{
+    %vars
+    morekeywords=[2]{robot,ev3,screen,line_sensor,speaker,left_motor,threshold},
+    keywordstyle=[2]\color{varblue},
+    %funs
+    morekeywords=[3]{straight, turn, drive,print,reflection,say,run_time},
+    keywordstyle=[3]\color{funyellow},
+    %nums
+    morekeywords=[4]{distance, angle, turn_rate, drive_speed},
+    keywordstyle=[4]\color{numgreen},
+    %names
+    morekeywords=[5]{ColorSensor,Port, DriveBase},
+    keywordstyle=[5]\color{decgreen},
+    %consts
+    morekeywords=[6]{S3, LINE_REF, BACKGROUND_REF, FORWARD_SPEED, TURN_GAIN},
+    keywordstyle=[6]\color{constblue},
+}
+
+\usepackage{soul}
+\sethlcolor{vbbackground}
+\newcommand{\vb}[1]{\hl{\texttt{#1}}} % use for verbatim
+\newcommand{\code}[1]{\colorbox{background}{\lstinline[style=moving]{#1}}} % use for actual code
+
+
+% ============================================================================
+% Paragraph and Typography
+% ============================================================================
+
+\usepackage[skip=12pt plus2pt, indent=0pt]{parskip}
+
+\usepackage{enumitem}
+\setlist[enumerate]{itemsep=6pt,parsep=0pt}
+
+\renewcommand{\familydefault}{\sfdefault}
+
+
+% ============================================================================
+% Custom Boxes
+% ============================================================================
+
+\usepackage{awesomebox}
+\newcommand{\thinkbox}[1]{\awesomebox[pink]{\aweboxrulewidth}{\faBrain}{pink}{#1}}
+\setlength{\aweboxvskip}{4pt}
+
+
+% ============================================================================
+% Custom Environments
+% ============================================================================
+
+% Code Block
+\lstnewenvironment{codeblock}
+  {\lstset{style=moving}}
+  {}
+
+
+% ============================================================================
+% Title Page Template
+% ============================================================================
+
+% Custom title block for main title and subtitle
+\NewDocumentCommand{\robochallengetitle}{m m O{}}{
+    \begin{center}
+        \Huge
+        \textbf{#1}
+        \\
+        \IfBlankF{#3}{{\Large\color{gray}\textit{#3}} \\}
+        
+        \Large
+        \vspace{1em}
+        #2
+        \vspace{1.5em}
+        
+    \end{center}
+    \normalsize 
+}
+
+
+% ============================================================================
+% Header/Footer
+% ============================================================================
+
+% Regular page style
+\pagestyle{fancy}
+\fancyhf{}
+% \lhead{\color{blue}RoboChallenge}
+% \rhead{\thepage}
+\cfoot{\scriptsize\color{gray}© \the\year \, \@author \quad CC BY-SA 4.0}
+\rhead{\color{gray}\thepage}
+\lhead{\small\color{gray}\sessionname \, \sessionversion}
+\renewcommand{\headrulewidth}{0pt}
+
+% First page footer
+\newcommand{\firstpagefooter}{
+\begin{center}    
+    \footnotesize\color{gray}
+    \vspace{1em}
+    \rule{0.8\textwidth}{0.5pt}
+    \vspace{-0.5em}
+        
+    This worksheet is for the RoboChallenge session \textit{\sessionname} \textit{\sessionversion}.
+    \\
+    Corresponding programs are available in the repository at \texttt{github.com/bennett-j/RoboChallenge}.
+    \\
+    © \the\year \ \@author \ (list in the repository). Licensed under CC BY-SA 4.0.
+
+\end{center}
+\vspace{-2em}
+    
+}

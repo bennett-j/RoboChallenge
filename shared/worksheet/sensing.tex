@@ -1,0 +1,19 @@
+\section*{Sensing}
+Did the robot finish exactly where it started when you drove in a square? The robot has no way to "see" where it is. Just like you trying to walk in a big square whilst blindfolded. To let our robots "see", we use \emph{sensors} on them. In this part, we'll use the reflectance sensor. It shines some light onto the floor beneath it and measures how much is reflected, if the floor is light (white) it will have a high reflectance but if it's dark (black) the reflectance will be low.
+
+\begin{enumerate}
+\item Open the script \vb{threshold-test.py}. You will see in the program we have added the sensor with the line  
+\begin{codeblock}
+line_sensor = ColorSensor(Port.S3)
+\end{codeblock}
+and that we measure the reflectance and show it on the robot's screen with
+\begin{codeblock}
+ev3.screen.print(line_sensor.reflection())
+\end{codeblock}
+\item Run the program and look at the reflectance values shown on the robot's screen. 
+\item Move the robot (with your hand) so the sensor is directly above the line and make a note of the reflectance value. Repeat to get a reflectance of the background surface. 
+\item Now open \vb{sensing.py} and input the values you measured for \code{LINE\_REF} and \code{BACKGROUND\_REF}. 
+\item Line up your robot pointing towards your finish line. 
+\item Get the robot to drive then stop at the line by downloading and running the program. 
+\item Examine the code and see if you can explain to a demonstrator how it works. 
+\end{enumerate}

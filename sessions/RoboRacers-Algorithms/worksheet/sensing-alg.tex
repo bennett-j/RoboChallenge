@@ -1,0 +1,34 @@
+\section*{Sensing}
+Did the robot finish exactly where it started when you drove in a square? The robot has no way to "see" where it is. Just like you trying to walk in a big square whilst blindfolded. To let our robots "see", we use \emph{sensors} on them. In this part, we'll use the reflectance sensor. It shines some light onto the floor beneath it and measures how much is reflected. Let's look at the diagram below with a black line and a white background...
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{images/reflectance_sensor_cases.png}
+    \vspace{1em}
+\end{figure}
+
+In case \textbf{A}, the sensor is shining onto white and the reflectance value will be high (close to 100). However, in case \textbf{B}, the sensor is shining onto black and the reflectance value will be low (close to 0).
+
+\thinkbox{Think about what the sensor value might be in case \textbf{C} where the sensor is half on the black line and half on the white background.}
+
+\begin{enumerate}
+\item Open the script \vb{threshold-test.py}. You will see in the program we have added the sensor with the line  
+\begin{codeblock}
+line_sensor = ColorSensor(Port.S3)
+\end{codeblock}
+and that we measure the reflectance and show it on the robot's screen with
+\begin{codeblock}
+ev3.screen.print(line_sensor.reflection())
+\end{codeblock}
+
+\item Run the program and look at the reflectance values shown on the robot's screen. 
+\item Move the robot (with your hand) so the sensor is directly above the line and make a note of the reflectance value. Repeat to get a reflectance of the background surface. 
+\item Now open \vb{sensing.py} and input the values you measured for \code{LINE\_REF} and \code{BACKGROUND\_REF}. 
+\end{enumerate}
+
+Now the robot can \emph{sense} what is happening in the world, it needs to know how to react to what it \emph{senses}. We put together a set of rules which makes a process we call an \emph{algorithm}.
+
+\begin{enumerate}
+    \setcounter{enumi}{4} 
+    \item Design an algorithm so that your robot will drive forwards and stop when it reaches the line. Write your algorithm in the program \vb{sensing.py} and test it.
+\end{enumerate}

@@ -1,11 +1,6 @@
-docs/_minted-roboracers/default.pygstyle
-docs/_minted-roboracers/9C5E62E609AF1E5937ECA9BF14DE31D0B161F052A76CF6376AF537C7B88DDCB9.pygtex
-docs/roboracers.synctex.gz
-
-# Ignore during dev of updated worksheet 2025, Charlotte Harris
-
-docs/worksheet_new_2025.aux
-docs/worksheet_new_2025.fdb_latexmk
-docs/worksheet_new_2025.fls
-docs/worksheet_new_2025.log
-docs/worksheet_new_2025.synctex.gz
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.fdb_latexmk
+*.fls

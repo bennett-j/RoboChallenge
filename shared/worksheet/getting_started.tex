@@ -1,0 +1,60 @@
+\section*{Getting Started}
+\subsection*{The Robot}
+Let's turn the robot on. If the light behind the middle button is green then you're good to go. If there are no lights, press the middle button and wait for it to turn on. This could take a minute, so while you're waiting read on.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\textwidth]{../../../shared/worksheet/images/ev3brick_labelled.png}
+\end{figure}
+
+You will see the robot has two wheels (that it uses to move) and a range of sensors (we'll get to them later) all held together by lego. At the centre is a big box that we call the \vb{brick}; it tells every other part of the robot what to do. At this stage, robots are just a pile of lego and electronics - not very intelligent - until we tell them what to do. This requires a \vb{program}. 
+
+\subsection*{Running a program}
+Let's run a program.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../../../shared/worksheet/images/run_program_manual.png}
+\end{figure}
+
+Use the buttons on the robot to navigate \vb{File browser > RoboChallenge > programs > starting.py}. Clicking \vb{starting.py} will "run" that program. You should hear the robot say "Hello World", and turn a wheel! 
+
+\notebox{Press the \vb{back} button on the robot to stop the program.}
+
+
+\subsection*{Creating a program}
+Next we want to be able to write our own programs to get the robot to do what we want. You will write the code on the laptop using Visual Studio Code which many students and many professionals use to write code.
+
+\begin{enumerate}
+    % \item Turn the laptop on and open the application Visual Studio Code if not already.
+    % \item From the \vb{File} menu, select \vb{Open Folder...}. Select \vb{RoboChallenge} folder on the \vb{Desktop}.
+    \item On the laptop, open the file \vb{starting.py} by clicking on it in the \vb{Explorer} left panel. This was the program we just ran on the robot.
+    \item Change the program to say``Hello [your names]". 
+    \item Change the program to get the other wheel to turn. 
+\end{enumerate}
+
+
+\notebox{Any line starting with \code{\#} is a comment which the robot ignores. e.g. \code{# This is a comment}. Every other line tells the robot to do something.}
+
+\tipbox{\raggedright You will need to change the lines \code{ev3.speaker.say("Hello World!")} and \code{left_motor.run_time(360,1000)}.}
+
+Great, you've written your first program! 
+
+\subsection*{Downloading a program to the robot}
+Now we need to download it to the robot and run it.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{../../../shared/worksheet/images/connecting_ev3.png}
+\end{figure}
+
+\begin{enumerate}
+    \item Open the \vb{Explorer} in the left panel of VSCode (see image). 
+    \item Connect EV3 to PC with a cable. (EV3 must be on and the light lit green) 
+    \item Expand the \vb{EV3DEV DEVICE BROWSER} from the bottom of the panel. 
+    \item Click \vb{Click here to connect to a device}. 
+    \item Select your device (from the top of the screen). 
+    \item Press \vb{F5} (maybe \vb{Fn + F5}) to \vb{download and run current file}. Alternatively open the \vb{Run and Debug} side panel and click the play button. 
+\end{enumerate}
+
+\notebox{The robot will start running the program whilst still plugged in. You can uplug it once it has finished downloading and you can re-run the program unplugged as per the earlier instructions to run a program.}
