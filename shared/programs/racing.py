@@ -21,11 +21,11 @@ line_sensor = ColorSensor(Port.S3)
 # Create 'robot' by initialising the drive base with motors and dimensions.
 robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
-# 'adjusting_reflectance' refers to the reflectance value at which the robot will stop moving
-# 'measured_reflectance' refers to the user inputted reflectance value measured from the robot's sensor
-# NOTE default value for measured_reflectance is 3, which should make the robot stop on a black line
-measured_reflectance = 3
-adjusting_threshold = measured_reflectance + 5
+# Set the reflectance values for the line and background
+# The target reflectance is the midpoint of the line and background reflectance
+LINE_REF = 70
+BACKGROUND_REF = 15
+reflectance_setpoint = (LINE_REF + BACKGROUND_REF)/2
 
 # Set forward speed - default is 50
 FORWARD_SPEED = 50
@@ -39,7 +39,7 @@ TURN_GAIN = 2.5
 while True:
     # Measure reflectance and determine deviation from line and multiply by gain
     measurement = line_sensor.reflection()
-    deviation = measurement - adjusting_threshold
+    deviation = measurement - reflectance_setpoint
     turn_rate = TURN_GAIN * deviation
     
     # Update the robot's speeds
