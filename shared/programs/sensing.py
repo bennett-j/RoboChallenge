@@ -20,20 +20,13 @@ line_sensor = ColorSensor(Port.S3)
 # Create 'robot' by initialising the drive base with motors and dimensions.
 robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
-######################
-# NOTES FOR STUDENTS #
-######################
-# 'stopping_reflectance' refers to the reflectance value at which the robot will stop moving
-# 'measured_reflectance' refers to the user inputted reflectance value measured from the robot's sensor
-# NOTE default value for measured_reflectance is 3, which should make the robot stop on a black line
-######################
-# NOTES FOR STUDENTS #
-######################
-measured_reflectance = 3
-stopping_threshold = measured_reflectance + 5
+# Set the reflectance value for the line that you measured.
+LINE_REF = 3
+# Calculate the stopping reflectance value by adding a margin to the line reflectance.
+stop_reflectance = LINE_REF + 5
 
-# While the reflection is brighter than the threshold (i.e. white), drive forwards.
-while line_sensor.reflection() > stopping_threshold:
+# While the reflection is brighter than the stopping reflectance, drive forwards.
+while line_sensor.reflection() > stop_reflectance:
     robot.drive(100, 0)
 
 # Stop driving.
