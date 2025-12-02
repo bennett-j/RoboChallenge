@@ -23,8 +23,8 @@ robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
 # Set the reflectance values for the line and background
 # The target reflectance is the midpoint of the line and background reflectance
-LINE_REF = 70
-BACKGROUND_REF = 15
+LINE_REF = 70         # white line
+BACKGROUND_REF = 15   # black road
 reflectance_setpoint = (LINE_REF + BACKGROUND_REF)/2
 
 # Set forward speed - default is 50

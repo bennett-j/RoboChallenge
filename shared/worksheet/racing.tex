@@ -1,22 +1,19 @@
 \section*{The Final Round}
 Now our robot can see, it's time to get our robot to race on the track by following the line!
 
-% dont make them input any values into racing.py, hardcode them
-% the experimentation here is about speed and turn gain
 \begin{enumerate}
 \item Open \vb{racing.py} on the laptop. Have a quick look at it and see if you can figure out how it works. 
-\item Place your robot on the racetrack with the sensor hovering over the black centre line in the road.
+\item Place your robot on the racetrack with the sensor hovering over the white centre line in the road.
 \item Run \vb{racing.py} on the robot and watch what happens!
 \item Read the comments that explain how the program works - specifically \code{FORWARD\_SPEED} and \code{TURN\_GAIN}.
 \item Adjust \code{FORWARD\_SPEED} and \code{TURN\_GAIN} so that the robot can complete the racetrack in the quickest time! Get your session leader to time your attempts along the race track.
 \end{enumerate}
 
 \importantbox{DON'T BREAK THE RULES!
-\newline Remember the rules of the tournament...
 \begin{enumerate}
     \item Robot must start with wheels behind the start line.
     \item Robot must not leave the road or crash into trees.
     \item Robot's wheels must cross the finish line for a valid track completion.
 \end{enumerate}}
 
-\notebox{The robot follows the edge of a line (not the line itself). The \code{adjusting_threshold} is calculated to be grey, the average of the reflectance values measured for white and black. Suppose the black line is on the left and the white background on the right. When the sensor sees more white than the threshold, the robot neeeds to turn to the left to find the line and the opposite for when it sees too much black. This is why the robot can only follow one side of the line, rather than the middle.}
+\notebox{The robot follows the edge of a line (not the line itself). The \code{reflectance_setpoint} is calculated to be grey, the average of the reflectance values measured for the line and road. Suppose the white line is on the left and the dark road background on the right. When the sensor sees more dark road than the setpoint, the robot needs to turn to the left to find the line and the opposite for when it sees too much white line. This is why the robot can only follow one side of the line, rather than the middle.}
