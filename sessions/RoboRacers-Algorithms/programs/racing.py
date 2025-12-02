@@ -21,9 +21,9 @@ line_sensor = ColorSensor(Port.S3)
 # Create 'robot' by initialising the drive base with motors and dimensions.
 robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
-# Specify the reflectance of the line and the background and calculate the threshold using the midpoint.
+# Specify the reflectance of the line and the background and calculate the setpoint using the midpoint.
 LINE_REF = 5
 BACKGROUND_REF = 50
-threshold = (LINE_REF + BACKGROUND_REF)/2
+reflectance_setpoint = (LINE_REF + BACKGROUND_REF)/2
 
 # Write your code here!
