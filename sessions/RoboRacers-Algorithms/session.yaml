@@ -10,10 +10,11 @@ suitability: Understanding of basic programming concepts such as loops and condi
 duration: 60-90 minutes
 authors:
   - James Bennett
+  - Charlotte Harris
 files:
   - shared/programs/starting.py
   - shared/programs/moving.py
-  - shared/programs/threshold-test.py
+  - shared/programs/threshold-measurer.py
   - sessions/RoboRacers-Algorithms/programs/sensing.py
   - sessions/RoboRacers-Algorithms/programs/racing.py
   
