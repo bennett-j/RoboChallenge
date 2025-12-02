@@ -21,15 +21,16 @@ line_sensor = ColorSensor(Port.S3)
 # Create 'robot' by initialising the drive base with motors and dimensions.
 robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
-# Specify the reflectance of the line and the background and calculate the threshold using the midpoint.
-LINE_REF = 5
-BACKGROUND_REF = 50
-threshold = (LINE_REF + BACKGROUND_REF)/2
+# Set the reflectance values for the line and background
+# The target reflectance is the midpoint of the line and background reflectance
+LINE_REF = 70         # white line
+BACKGROUND_REF = 15   # black road
+reflectance_setpoint = (LINE_REF + BACKGROUND_REF)/2
 
-# Set forward speed.
+# Set forward speed - default is 50
 FORWARD_SPEED = 50
 
-# Set turn gain.
+# Set turn gain - default is 2.5
 # Turn gain is a multiplier for how sensitive the robot steers according to the deviation.
 # Bigger number => robot will turn more per deviation
 TURN_GAIN = 2.5
@@ -38,7 +39,7 @@ TURN_GAIN = 2.5
 while True:
     # Measure reflectance and determine deviation from line and multiply by gain
     measurement = line_sensor.reflection()
-    deviation = measurement - threshold
+    deviation = measurement - reflectance_setpoint
     turn_rate = TURN_GAIN * deviation
     
     # Update the robot's speeds

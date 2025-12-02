@@ -4,15 +4,16 @@ objectives:
   - Learn how to create and run programs for the robot.
   - Master moving the robot around.
   - Learn how robots can "see" the world with a reflectance sensor.
-  - Race around the racetrack and tune the robot so it completes it a well as possible.
+  - Race along the racetrack and tune the robot so it completes it as fast as possible.
 suitability: Secondary school ages with no programming experience. Younger students may need a longer session.
 duration: 45-60 minutes
 authors:
   - James Bennett
+  - Charlotte Harris
 files:
   - shared/programs/starting.py
   - shared/programs/moving.py
-  - shared/programs/threshold-test.py
+  - shared/programs/threshold-measurer.py
   - shared/programs/sensing.py
   - shared/programs/racing.py
   

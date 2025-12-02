@@ -1,19 +1,36 @@
-\section*{Sensing}
-Did the robot finish exactly where it started when you drove in a square? The robot has no way to "see" where it is. Just like you trying to walk in a big square whilst blindfolded. To let our robots "see", we use \emph{sensors} on them. In this part, we'll use the reflectance sensor. It shines some light onto the floor beneath it and measures how much is reflected, if the floor is light (white) it will have a high reflectance but if it's dark (black) the reflectance will be low.
+\section*{Using the Reflectance Sensor}
+You may have noticed that it was difficult and time consuming to complete the race track using manual commands. Robots use sensors to help make their own decisions by seeing the world around them.
+
+\thinkbox{Imagine trying to walk in a square with your eyes closed. That would be difficult! It would be much easier if you could see. By using the sensor, we are allowing the robot to ``see".}
+
+The robots you are using have \textbf{reflectance sensors}. You should see it sticking out of the front of the robot, shining a red light onto the table. If you can't see this, ask your session leader for help.
+
+The sensor shines a light onto the floor underneath it, and measures how much is reflected back. If the floor is a light colour (for example, white) it will have a \textbf{high} reflectance value but if it's dark (for example black) the reflectance will be \textbf{low}.
+
+\subsection*{Making sure the sensor is working}
+\begin{enumerate}
+    \item Put the robot on the piece of paper on your desk, with the wheels on the start line.
+    \item On the robot, run the \vb{sensing.py} program. It should stop when it reaches the black finish line.
+\end{enumerate}
+
+% introduce exploring the sensor values and how it works
+Your task now is to make the robot stop at the grey line in the middle of the paper. Let's measure the reflectance of the grey line.
 
 \begin{enumerate}
-\item Open the script \vb{threshold-test.py}. You will see in the program we have added the sensor with the line  
-\begin{codeblock}
-line_sensor = ColorSensor(Port.S3)
-\end{codeblock}
-and that we measure the reflectance and show it on the robot's screen with
-\begin{codeblock}
-ev3.screen.print(line_sensor.reflection())
-\end{codeblock}
-\item Run the program and look at the reflectance values shown on the robot's screen. 
-\item Move the robot (with your hand) so the sensor is directly above the line and make a note of the reflectance value. Repeat to get a reflectance of the background surface. 
-\item Now open \vb{sensing.py} and input the values you measured for \code{LINE\_REF} and \code{BACKGROUND\_REF}. 
-\item Line up your robot pointing towards your finish line. 
-\item Get the robot to drive then stop at the line by downloading and running the program. 
-\item Examine the code and see if you can explain to a demonstrator how it works. 
+    \setcounter{enumi}{2} 
+    \item On the robot, run \vb{threshold\_measurer.py}. You will see lots of numbers on the robot's screen - these are the \textit{reflectance values} from the sensor.
+    \item Move the robot around (with your hand) and see how the values change when the sensor is above different coloured surfaces.
+    \item To stop the program, press the back button (top left button) on the robot.
+    \item On the laptop, open \vb{sensing.py}.
 \end{enumerate}
+
+\warningbox{Before moving on: examine \vb{sensing.py} and figure out what made the robot stop on the black line? How can you make the robot stop at the grey line?}
+
+\begin{enumerate}
+    \setcounter{enumi}{6} 
+    \item Find the lines in the program that define \code{LINE_REF} and \code{stop_reflectance}, then read the comments to see what they are used for.
+    \item Change the program's reflectance value for the line to make the robot stop at the grey line.
+    \item Download your new program to the robot and run it to test whether your robot stops on the grey line.
+\end{enumerate}
+
+Did you manage to make the robot stop on the grey line? If you did, congratulations! If not, try again. Why not ask your class mates for help?

@@ -1,60 +1,83 @@
 \section*{Getting Started}
 \subsection*{The Robot}
-Let's turn the robot on. If the light behind the middle button is green then you're good to go. If there are no lights, press the middle button and wait for it to turn on. This could take a minute, so while you're waiting read on.
+If the robot has a green light on top then it is powered on and waiting for you! If you do not see a green light, ask your session leader for help. The \vb{brick} in the picture below is the brains of the robot - it tells every other part of the robot what to do.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{../../../shared/worksheet/images/ev3brick_labelled.png}
+    \includegraphics[width=0.45\textwidth]{images/ev3brick_labelled.png}
 \end{figure}
 
-You will see the robot has two wheels (that it uses to move) and a range of sensors (we'll get to them later) all held together by lego. At the centre is a big box that we call the \vb{brick}; it tells every other part of the robot what to do. At this stage, robots are just a pile of lego and electronics - not very intelligent - until we tell them what to do. This requires a \vb{program}. 
+The \vb{up}, \vb{down}, \vb{left}, and \vb{right} buttons are not used to drive the robot. You will use them to select the robot's \vb{programs} from the screen. Let's run a program to test the robot!
 
 \subsection*{Running a program}
-Let's run a program.
+Look at the small screen on the robot. It should look like the pictures below. 
+
+\begin{enumerate}
+    \item Use \vb{up}, \vb{down} and \vb{enter} on the robot to open \vb{File Browser}, then \vb{RoboChallenge}. 
+    \item Find the \vb{starting.py} file and make sure it is highlighted in black.
+    \item Run the program by pressing the middle \vb{enter} button. Listen closely! 
+\end{enumerate}
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.9\textwidth]{../../../shared/worksheet/images/run_program_manual.png}
+    \includegraphics[width=0.9\textwidth]{images/run_program_manual.png}
 \end{figure}
 
-Use the buttons on the robot to navigate \vb{File browser > RoboChallenge > programs > starting.py}. Clicking \vb{starting.py} will "run" that program. You should hear the robot say "Hello World", and turn a wheel! 
+What did the robot say? It should have said ``Hello World!". This is a simple program to get you started. If the robot didn't speak or make any noise, ask your session leader for help.
 
-\notebox{Press the \vb{back} button on the robot to stop the program.}
+\warningbox{To stop running a program, press the \vb{back} button at the bottom left of the robot screen.}
 
+\newpage
+\subsection*{Editing a program}
+Programs don't write themselves. It's great that the robot said ``Hello World", but that's not your name! So next, we'll change the program to greet you personally. You will write your code on the laptop using Visual Studio Code. This IDE (Integrated Development Environment) is used by many students and professionals to write code.
 
-\subsection*{Creating a program}
-Next we want to be able to write our own programs to get the robot to do what we want. You will write the code on the laptop using Visual Studio Code which many students and many professionals use to write code.
+Look at the laptop in front of you. It should be logged in, with the file \vb{starting.py} open. If you don't think this is the case, then ask your session leader for help. Follow the steps below to change \vb{starting.py} to make the robot greet you.
+
+\warningbox{Any line starting with \code{\#} is a comment which the robot ignores. For example, \code{# This is a comment}. All other lines tell the robot to do something.}
 
 \begin{enumerate}
-    % \item Turn the laptop on and open the application Visual Studio Code if not already.
-    % \item From the \vb{File} menu, select \vb{Open Folder...}. Select \vb{RoboChallenge} folder on the \vb{Desktop}.
-    \item On the laptop, open the file \vb{starting.py} by clicking on it in the \vb{Explorer} left panel. This was the program we just ran on the robot.
-    \item Change the program to say``Hello [your names]". 
-    \item Change the program to get the other wheel to turn. 
+    \item Find the line in the program which makes the robot say ``Hello World!''.
+    \item Change the program to say``Hello [your names]!" (for example, ``Hello Jeremy!''). 
 \end{enumerate}
 
+\tipbox{\raggedright You will need to change the line which says \code{ev3.speaker.say("Hello World!")}}
 
-\notebox{Any line starting with \code{\#} is a comment which the robot ignores. e.g. \code{# This is a comment}. Every other line tells the robot to do something.}
-
-\tipbox{\raggedright You will need to change the lines \code{ev3.speaker.say("Hello World!")} and \code{left_motor.run_time(360,1000)}.}
-
-Great, you've written your first program! 
+Great, you've written your first program! Now, we need to send the program to the robot so it can run it.
 
 \subsection*{Downloading a program to the robot}
-Now we need to download it to the robot and run it.
+The first step is to make sure the robot is plugged in to the laptop via the USB cable. If you aren't sure where to plug the robot in, or if you don't have a cable, ask your session leader for help.
+
+On your screen, you should see the \vb{EV3DEV DEVICE BROWSER} at the bottom of the left panel. You may have to expand it by clicking on the small arrow next to it. If you don't see this, ask your session leader for help.
+
+\warningbox{The next steps are very important! Make sure you follow them carefully. If you get stuck, ask your session leader for help.}
+
+\newpage
+Look for the small circle which is either green, yellow, or red. If it is green, like in picture 1 below, the robot is connected and ready to receive code. If it is yellow like in picture 2, the robot is currently in the process of connecting. If it is red, like in picture 3, the robot is not connected. If you are not connected, right click the robot's name, and then click \vb{Reconnect}.
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.9\textwidth]{../../../shared/worksheet/images/connecting_ev3.png}
+    \includegraphics[width=0.45\textwidth]{images/green_light.png}
+    \includegraphics[width=0.45\textwidth]{images/orange_light.png}
+\end{figure}
+\begin{figure}[h]
+    \centering
+        \includegraphics[width=0.45\textwidth]{images/red_light.png}
 \end{figure}
 
+The circle must be green like in picture 1 before you can download your program to the robot. If you can't make it turn green, ask your session leader for help.
+
 \begin{enumerate}
-    \item Open the \vb{Explorer} in the left panel of VSCode (see image). 
-    \item Connect EV3 to PC with a cable. (EV3 must be on and the light lit green) 
-    \item Expand the \vb{EV3DEV DEVICE BROWSER} from the bottom of the panel. 
-    \item Click \vb{Click here to connect to a device}. 
-    \item Select your device (from the top of the screen). 
-    \item Press \vb{F5} (maybe \vb{Fn + F5}) to \vb{download and run current file}. Alternatively open the \vb{Run and Debug} side panel and click the play button. 
+    \item Hover the cursor to the right of where it says \vb{EV3DEV DEVICE BROWSER} and click on the right hand button which looks like an arrow pointing downwards.
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=0.32\textwidth]{images/down_arrow.png}
+    \end{figure}
+    \item Watch in the bottom right hand side of the laptop screen whilst the files and programs are downloaded to the robot. You will see a blue loading bar fill from left to right, and a message saying \vb{Download Complete} when it has finished.
+    \begin{figure}[!h]
+        \centering
+        \includegraphics[width=0.52\textwidth]{images/download_example.png}
+    \end{figure}
+    \item Now, unplug the robot, and run the program again by following the steps in the \vb{Running a Program} section above. Listen carefully to make sure the robot says your name!
 \end{enumerate}
 
-\notebox{The robot will start running the program whilst still plugged in. You can uplug it once it has finished downloading and you can re-run the program unplugged as per the earlier instructions to run a program.}
+\warningbox{Now that you have unplugged the robot, the little circle will be red when you plug it back in. This is normal, it just means the robot is not connected to the laptop. You will have to reconnect the robot to the laptop by right clicking on the robot's name and selecting \vb{Reconnect}.}

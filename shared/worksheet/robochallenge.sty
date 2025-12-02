@@ -40,6 +40,8 @@
 \definecolor{background}{HTML}{1F1F1F} %vscode background
 \definecolor{vbbackground}{HTML}{D6D6D6} %grey vb background
 
+\definecolor{warningorange}{HTML}{ffa53a} % dFF8000 e37100
+\definecolor{hintblue}{HTML}{88d2f2} %7bbedb}
 
 % ============================================================================
 % Fonts & Typography
@@ -70,7 +72,7 @@
 
 \lstdefinestyle{moving}{
     %vars
-    morekeywords=[2]{robot,ev3,screen,line_sensor,speaker,left_motor,threshold},
+    morekeywords=[2]{robot,ev3,screen,line_sensor,speaker,left_motor,threshold, stop_reflectance, reflectance_setpoint},
     keywordstyle=[2]\color{varblue},
     %funs
     morekeywords=[3]{straight, turn, drive,print,reflection,say,run_time},
@@ -110,6 +112,8 @@
 
 \usepackage{awesomebox}
 \newcommand{\thinkbox}[1]{\awesomebox[pink]{\aweboxrulewidth}{\faBrain}{pink}{#1}}
+\renewcommand{\warningbox}[1]{\awesomebox[warningorange]{\aweboxrulewidth}{\faExclamationTriangle}{warningorange}{#1}}
+\renewcommand{\tipbox}[1]{\awesomebox[hintblue]{\aweboxrulewidth}{\faLightbulb}{hintblue}{#1}}
 \setlength{\aweboxvskip}{4pt}
 
 
