@@ -1,0 +1,35 @@
+{
+    "ev3devBrowser.download.exclude": "{**/.*,**/*.pdf,**/*.png}",
+    "latex-workshop.latex.tools": [
+        {
+            "name": "pdflatex",
+            "command": "pdflatex",
+            "args": [
+                "-synctex=1",
+                "-interaction=nonstopmode",
+                "-file-line-error",
+                "%DOC%"
+            ]
+        }
+    ],
+    "latex-workshop.latex.recipes": [
+        {
+            "name": "pdflatex",
+            "tools": [
+                "pdflatex"
+            ]
+        }
+    ],
+    "latex-workshop.latex.autoBuild.run": "onFileChange",
+    "latex-workshop.latex.autoClean.run": "onBuilt",
+    "latex-workshop.latex.clean.method": "glob",
+    "latex-workshop.latex.clean.fileTypes": [
+        "*.aux",
+        "*.log",
+        "*.synctex.gz"
+    ],
+    "latex-workshop.view.pdf.viewer": "tab",
+    "files.associations": {
+        "*.tex": "latex"
+    }
+}
