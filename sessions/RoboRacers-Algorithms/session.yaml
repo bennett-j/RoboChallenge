@@ -17,4 +17,6 @@ files:
   - shared/programs/threshold-measurer.py
   - sessions/RoboRacers-Algorithms/programs/sensing.py
   - sessions/RoboRacers-Algorithms/programs/racing.py
+  - shared/track/racetrack.pdf
+  - shared/track/sensing.pdf
   

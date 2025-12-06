@@ -16,4 +16,6 @@ files:
   - shared/programs/threshold-measurer.py
   - shared/programs/sensing.py
   - shared/programs/racing.py
+  - shared/track/racetrack.pdf
+  - shared/track/sensing.pdf
   
