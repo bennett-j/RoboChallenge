@@ -23,7 +23,7 @@ robot = DriveBase(left_motor, right_motor, wheel_diameter=55.5, axle_track=104)
 
 # Set the reflectance values for the line and background
 # The target reflectance is the midpoint of the line and background reflectance
-LINE_REF = 70         # white line
+LINE_REF = 85         # white line
 BACKGROUND_REF = 15   # black road
 reflectance_setpoint = (LINE_REF + BACKGROUND_REF)/2
 
@@ -33,7 +33,7 @@ FORWARD_SPEED = 50
 # Set turn gain - default is 2.5
 # Turn gain is a multiplier for how sensitive the robot steers according to the deviation.
 # Bigger number => robot will turn more per deviation
-TURN_GAIN = 2.5
+TURN_GAIN = 1.5
 
 # while True will loop forever
 while True:
