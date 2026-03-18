@@ -85,8 +85,9 @@ On each run the workflow will:
 A typical release flow for a new RoboRacers‑Algorithms version is:
 
 ```bash
-git checkout RoboRacers-Algorithms        # or your preferred development branch
-# … make and commit your changes …
+# create a new development branch
+# make and commit your changes
+# merge changes to main 
 git tag RoboRacers-Algorithms/v2.0
 git push origin RoboRacers-Algorithms/v2.0
 ```
